@@ -1,0 +1,21 @@
+apiVersion: karpenter.sh/v1beta1
+kind: Provisioner
+metadata:
+  name: gpu-provisioner-p3-2xlarge
+spec:
+  constraints:
+    - key: "node.kubernetes.io/instance-type"
+      operator: In
+      values: ["p3.2xlarge"]
+  labels:
+    karpenter.sh/capacity-type: "ON_DEMAND"
+    nvidia.com/device-plugin.config: "p3.2xlarge"
+  limits:
+    resources:
+      cpu: 1000
+      memory: 2000Gi
+  provider:
+    amiFamily: "AL2"
+    tags:
+      karpenter.sh/provisioner-name: "gpu-provisioner-p3-2xlarge"
+      Name: "gpu-provisioner-p3-2xlarge"
